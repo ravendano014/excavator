@@ -18,7 +18,7 @@ Puedes ver la demostración en vivo [aquí](enlace-a-la-demo).
 
 ## Capturas de Pantalla
 
-![Captura de Pantalla 1](.png)
+![Captura de Pantalla 1](1.png)
 ![Captura de Pantalla 2](2.png)
 ![Captura de Pantalla 3](3.png)
 
