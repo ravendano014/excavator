@@ -1,0 +1,395 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Brazo Robótico</title>
+    <style>
+        canvas {
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+        }
+        .label {
+            position: absolute;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <script src="https://cdn.babylonjs.com/gui/babylon.gui.js"></script>
+    <script>
+   // Configuración de la escena
+var canvas = document.getElementById("renderCanvas");
+var engine = new BABYLON.Engine(canvas, true);
+var scene = new BABYLON.Scene(engine);
+var camera = new BABYLON.ArcRotateCamera(
+            "Camera",
+            Math.PI/1.33,
+            0.9,
+            15,
+            new BABYLON.Vector3(0, 0, 0),
+            scene
+        );
+camera.attachControl(canvas, true);
+var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+
+// Importar el modelo STL
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "BodyLower_2_.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "BodyUpper_2_.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "Bushing.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "Cabin.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "Grille.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "Kleinteile.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "TrackBoxLeft.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "TrkMdlPart.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "arm0a.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "arm0b.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "arm1.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "arm2.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "armConnector.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "cone.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "loeffel.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 80; 
+    importedMesh.position.y = -40; 
+    importedMesh.position.z = -180; 
+    importedMesh.rotation.x = -1.5707963267948966;
+    importedMesh.rotation.y = -1.5707963267948966; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "powerwheel.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "pwrWhlStabi.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "rotation_spur.STL", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "servo_pinion_gear.STL", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "tableLower.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "trackBoxRight.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "trackMiddleWheels.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "trackTightener.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "tracks.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "washerSpacer.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/", "wireHolder.stl", scene, function (newMeshes) {
+    var importedMesh = newMeshes[0];
+    importedMesh.setPivotPoint(new BABYLON.Vector3(0, 0, 0));
+    // importedMesh.parent = base;
+    importedMesh.position.x = 0; 
+    importedMesh.position.y = 0; 
+    importedMesh.position.z = 0; 
+    importedMesh.rotation.x = 0;
+    importedMesh.rotation.y = 0; 
+    importedMesh.rotation.z = 0;
+    importedMesh.material = new BABYLON.StandardMaterial("importedMeshMaterial", scene);
+    importedMesh.material.diffuseColor = new BABYLON.Color3(0, 1, 0); 
+});
+
+        
+// Iniciar el motor
+engine.runRenderLoop(function () {
+    scene.render();
+});
+
+// Manejo de redimensionamiento de la ventana
+window.addEventListener("resize", function () {
+    engine.resize();
+});
+     
+    </script>
+</body>
+</html>
