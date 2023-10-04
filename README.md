@@ -4,9 +4,7 @@ Este proyecto es una demostración de animación de una excavadora 3D utilizando
 
 ## Demostración en vivo
 
-Puedes ver la demostración en vivo [Assemble](https://ravendano014.github.io/excavator/index.html))
-
-[Excavator](https://raw.githubusercontent.com/ravendano014/excavator/main/Mesh/excavator.html)
+Puedes ver la demostración en vivo [Excavadora](https://ravendano014.github.io/excavator/index.html)
 
 ## Características
 
