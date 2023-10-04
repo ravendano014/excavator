@@ -4,7 +4,9 @@ Este proyecto es una demostración de animación de una excavadora 3D utilizando
 
 ## Demostración en vivo
 
-Puedes ver la demostración en vivo [aquí](enlace-a-la-demo).
+Puedes ver la demostración en vivo [aquí](enlace-a-la-demo)
+
+[Excavator](mesh/excavator.html)
 
 ## Características
 
