@@ -15,9 +15,29 @@
       height: 100%;
       touch-action: none;
     }
+    #sidebar {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 300px;
+      height: 100%;
+      background-color: #f0f0f0;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      border-left: 1px solid #ccc;
+    }
   </style>
 </head>
 <body>
+    <div id="sidebar">
+        <h2>Properties</h2>
+        <ul>
+            <li><strong>Position:</strong> <span id="position"></span></li>
+            <li><strong>Rotation:</strong> <span id="rotation"></span></li>
+            <li><strong>Color:</strong> <span id="color"></span></li>
+        </ul>
+    </div>
   <canvas id="renderCanvas"></canvas>
   <script src="https://cdn.babylonjs.com/babylon.js"></script>
   <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
@@ -216,46 +236,46 @@
                 pickedMesh.enableEdgesRendering();
 
                 window.addEventListener("keydown", function (event) {
-              var speed = 0.1;
-              switch (event.key) {
-                case "q":
-                  pickedMesh.position.x += speed;
-                  break;
-                case "a":
-                  pickedMesh.position.x -= speed;
-                  break;
-                case "w":
-                  pickedMesh.position.y += speed;
-                  break;
-                case "s":
-                  pickedMesh.position.y -= speed;
-                  break;
-                case "e":
-                  pickedMesh.position.z += speed;
-                  break;
-                case "d":
-                  pickedMesh.position.z -= speed;
-                  break;
-                case "r":
-                  pickedMesh.rotation.x += BABYLON.Tools.ToRadians(5);
-                  break;
-                case "f":
-                  pickedMesh.rotation.x -= BABYLON.Tools.ToRadians(5);
-                  break;
-                case "t":
-                  pickedMesh.rotation.y += BABYLON.Tools.ToRadians(5);
-                  break;
-                case "g":
-                  pickedMesh.rotation.y -= BABYLON.Tools.ToRadians(5);
-                  break;
-                case "y":
-                  pickedMesh.rotation.z += BABYLON.Tools.ToRadians(5);
-                  break;
-                case "h":
-                  pickedMesh.rotation.z -= BABYLON.Tools.ToRadians(5);
-                  break;
-              }
-            });
+                var speed = 0.01;
+                switch (event.key) {
+                    case "q":
+                    pickedMesh.position.x += speed;
+                    break;
+                    case "a":
+                    pickedMesh.position.x -= speed;
+                    break;
+                    case "w":
+                    pickedMesh.position.y += speed;
+                    break;
+                    case "s":
+                    pickedMesh.position.y -= speed;
+                    break;
+                    case "e":
+                    pickedMesh.position.z += speed;
+                    break;
+                    case "d":
+                    pickedMesh.position.z -= speed;
+                    break;
+                    case "r":
+                    pickedMesh.rotation.x += BABYLON.Tools.ToRadians(speed);
+                    break;
+                    case "f":
+                    pickedMesh.rotation.x -= BABYLON.Tools.ToRadians(speed);
+                    break;
+                    case "t":
+                    pickedMesh.rotation.y += BABYLON.Tools.ToRadians(speed);
+                    break;
+                    case "g":
+                    pickedMesh.rotation.y -= BABYLON.Tools.ToRadians(speed);
+                    break;
+                    case "y":
+                    pickedMesh.rotation.z += BABYLON.Tools.ToRadians(speed);
+                    break;
+                    case "h":
+                    pickedMesh.rotation.z -= BABYLON.Tools.ToRadians(speed);
+                    break;
+                }
+                });
             
             }
         }
@@ -264,4 +284,3 @@
   </script>
 </body>
 </html>
-
