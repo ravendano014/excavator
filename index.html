@@ -32,11 +32,19 @@
 <body>
     <div id="sidebar">
         <h2>Properties</h2>
+            <strong>Name:</strong> <span id="name"></span>
         <ul>
             <li><strong>Position:</strong> <span id="position"></span></li>
             <li><strong>Rotation:</strong> <span id="rotation"></span></li>
             <li><strong>Color:</strong> <span id="color"></span></li>
         </ul>
+        <h2>Move Object</h2>
+        <button onclick="moveObject('q')">Q</button>
+        <button onclick="moveObject('a')">A</button>
+        <button onclick="moveObject('w')">W</button>
+        <button onclick="moveObject('s')">S</button>
+        <button onclick="moveObject('e')">E</button>
+        <button onclick="moveObject('d')">D</button>
     </div>
   <canvas id="renderCanvas"></canvas>
   <script src="https://cdn.babylonjs.com/babylon.js"></script>
@@ -187,9 +195,21 @@
     ]
 }];
 
+    const localAxes = new BABYLON.AxesViewer(scene, 1);
 
     // Variable para el objeto 3D seleccionado
     var selectedMesh = null;
+
+    scene.onKeyboardObservable.add((kbInfo) => {
+        switch (kbInfo.type) {
+            case BABYLON.KeyboardEventTypes.KEYDOWN:
+                console.log("KEY DOWN: ", kbInfo.event.key);
+            break;
+            case BABYLON.KeyboardEventTypes.KEYUP:
+                console.log("KEY UP: ", kbInfo.event.code);
+            break;
+        }
+    });
 
     function createMeshFromPart(part) {
       var mesh = new BABYLON.Mesh(part.mesh_id, scene);
@@ -234,6 +254,13 @@
                 pickedMesh.edgesWidth = 40.0;
                 pickedMesh.edgesColor = new BABYLON.Color4(0, 1, 0.87);
                 pickedMesh.enableEdgesRendering();
+                selectedMesh = pickedMesh;
+
+                 // Mostrar propiedades en la barra lateral
+                document.getElementById("name").textContent = pickedMesh.id;
+                document.getElementById("position").textContent = `X: ${pickedMesh.position.x.toFixed(2)}, Y: ${pickedMesh.position.y.toFixed(2)}, Z: ${pickedMesh.position.z.toFixed(2)}`;
+                document.getElementById("rotation").textContent = `X: ${BABYLON.Tools.ToDegrees(pickedMesh.rotation.x).toFixed(2)}°, Y: ${BABYLON.Tools.ToDegrees(pickedMesh.rotation.y).toFixed(2)}°, Z: ${BABYLON.Tools.ToDegrees(pickedMesh.rotation.z).toFixed(2)}°`;
+                document.getElementById("color").textContent = `Color: ${pickedMesh.material ? pickedMesh.material.diffuseColor.toString() : "N/A"}`;
 
                 window.addEventListener("keydown", function (event) {
                 var speed = 0.01;
@@ -281,6 +308,10 @@
         }
     };
 
+// Función para mover el objeto 3D seleccionado según la tecla presionada
+function moveObject(key) {}
+
   </script>
 </body>
 </html>
+
