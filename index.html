@@ -195,8 +195,9 @@
     ]
 }];
 
-        const localAxes = new BABYLON.AxesViewer(scene, 1);
-        
+       const localAxes = new BABYLON.AxesViewer(scene, 1);
+
+
         // Cargar y posicionar cada parte del modelo 3D "spot"
         function loadAndPositionPart(part) {
             var meshURL = jsonParts[0].models;
@@ -242,7 +243,7 @@
                 selectedMesh = pickedMesh;
 
                  // Mostrar propiedades en la barra lateral
-                document.getElementById("name").textContent = pickedMesh.name;
+                document.getElementById("name").textContent = pickedMesh.mesh_name;
                 document.getElementById("position").textContent = `X: ${pickedMesh.position.x.toFixed(2)}, Y: ${pickedMesh.position.y.toFixed(2)}, Z: ${pickedMesh.position.z.toFixed(2)}`;
                 document.getElementById("rotation").textContent = `X: ${BABYLON.Tools.ToDegrees(pickedMesh.rotation.x).toFixed(2)}°, Y: ${BABYLON.Tools.ToDegrees(pickedMesh.rotation.y).toFixed(2)}°, Z: ${BABYLON.Tools.ToDegrees(pickedMesh.rotation.z).toFixed(2)}°`;
                 document.getElementById("color").textContent = `Color: ${pickedMesh.material ? pickedMesh.material.diffuseColor.toString() : "N/A"}`;
@@ -338,7 +339,7 @@ function downloadJson() {
   // Crear un enlace para la descarga
   const downloadLink = document.createElement("a");
   downloadLink.href = url;
-  downloadLink.download = "excavator.json";
+  downloadLink.download = "model.json";
   downloadLink.click();
 
   // Liberar la URL del objeto Blob
@@ -347,6 +348,24 @@ function downloadJson() {
 
 // Asigna la función downloadJson al botón de descarga
 document.getElementById("downloadJsonButton").addEventListener("click", downloadJson);
+
+document.addEventListener("keydown", function (event) {
+    if (event.key === "z") {
+        // Llama a la función changeColor() al presionar la tecla "Z"
+        changeColor();
+    }
+});
+
+function changeColor() {
+    const colorPicker = document.getElementById("colorPicker");
+    const selectedColor = colorPicker.value;
+
+    if (pickedMesh) {
+        // Cambiar el color del material de la parte seleccionada
+        pickedMesh.material = new BABYLON.StandardMaterial("material", scene);
+        pickedMesh.material.diffuseColor = new BABYLON.Color3.FromHexString(selectedColor);
+    }
+}
 
 
     </script>
