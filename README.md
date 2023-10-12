@@ -6,6 +6,8 @@ Este proyecto es una demostración de animación de una excavadora 3D utilizando
 
 Puedes ver la demostración en vivo [Excavadora](https://ravendano014.github.io/excavator/index.html)
 
+[Excavator](https://ravendano014.github.io/excavator/excavator.html)
+
 ## Características
 
 - **Modelo 3D de Excavadora:** Utilizamos un modelo 3D de una excavadora realista importado en Babylon.js.
